@@ -3,8 +3,8 @@ import logging
 import os
 from flask import Flask, request, render_template
 
-from upload_to_s3 import upload_to_s3
-from read_frames_from_csv import read_csv_file
+from app.upload_to_s3 import upload_to_s3
+from app.read_frames_from_csv import read_csv_file
 
 app = Flask(__name__)
 
