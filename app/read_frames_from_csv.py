@@ -2,7 +2,7 @@ import ast
 import logging
 import cv2
 import csv
-from upload_to_s3 import upload_to_s3
+from app.upload_to_s3 import upload_to_s3
 
 
 def handle_capture_time(capture_time: str):
