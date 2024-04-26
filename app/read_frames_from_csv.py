@@ -1,9 +1,7 @@
 import ast
 import logging
-import os
 import cv2
 import csv
-
 from upload_to_s3 import upload_to_s3
 
 
