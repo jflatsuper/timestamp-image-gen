@@ -1,8 +1,10 @@
 import ast
 import logging
+import os
 import cv2
 import csv
 from app.upload_to_s3 import upload_to_s3
+from werkzeug.datastructures import FileStorage
 
 
 def handle_capture_time(capture_time: str):
@@ -52,7 +54,7 @@ def video_to_frames(
 
             try:
                 written = upload_to_s3(
-                    f"quantisal/quantisal_images_{dir_name}/" + image_id, image_bytes
+                    f"nail/pr_nail_images_{dir_name}/" + image_id, image_bytes
                 )
             except Exception as e:
                 print(e)
@@ -98,3 +100,20 @@ def read_csv_file(file, file_name):
 
     for x in csv_arr:
         video_to_frames(x[0], dir_name, x[1], frame_rate=60)
+
+
+def upload_files(files: list[FileStorage], s3_folder=""):
+
+    for file in files:
+        print(file)
+        file_name = file.filename
+        if file_name.lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".bmp")):
+            local_path = file_name
+            print(local_path)
+
+            try:
+                written = upload_to_s3(f"blood/5-spot/{file_name}", file)
+
+                print(f"Successfully uploaded {local_path}")
+            except FileNotFoundError:
+                print(f"The file was not found: {local_path}")
