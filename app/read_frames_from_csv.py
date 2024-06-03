@@ -112,7 +112,7 @@ def upload_files(files: list[FileStorage], s3_folder=""):
             print(local_path)
 
             try:
-                written = upload_to_s3(f"blood/3-spot/{file_name}", file)
+                written = upload_to_s3(f"urine/{file_name}", file)
 
                 print(f"Successfully uploaded {local_path}")
             except FileNotFoundError:
